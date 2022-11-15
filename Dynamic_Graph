@@ -1,0 +1,21 @@
+# AddGraph **IJCAI'19**
+- 提出一种端到端方式解决动态图上异常边检测的方法。该方法包括动态GCN和attention模型，能够同时捕获动态图中长、短期pattern；
+- 以半监督方式结合选择性负采样技术和margin loss来训练网络，在真实数据集上优于SOTA；
+
+## Intro.
+### 两个挑战
+#### anomaly is flexible and dynamic nature
+- 这篇工作中的anomaly指的是fake data(虚假数据)，比如，在推荐场景中，恶意用户会同时控制多个账号生成很多边来增加其目标item的受欢迎程度；
+- 由于异常账户往往会在短时间内利用多个设备开展一些异常活动，因此他们会呈现一定的聚集性特征；然而这些异常账户在大多数时间是正常的，这增加了检测难度；
+#### anomaly detection lies in the insufficient labelled data
+- 已标注的一些样本可能不具有代表性，采用有监督学习方式往往表现不太好；
+
+## Related work
+- Feature-based: structural features, statistics features, content features (not flexible and restricted in a specific pattern) 
+- Deep learning-based: CAD、Netwalk (cannot capture the long-term and short-term patterns of nodes)
+
+## Addgraph framework
+- GCN学习上下文和结构特征
+- 构造局部窗口作为节点的short-term state, GRU+attention结合short-term和current-term state
+- 针对edges计算异常值
+- 选择负样本和margin loss
